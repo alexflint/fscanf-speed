@@ -121,12 +121,12 @@ int LoadText_Direct(const char* path) {
 	return nrows;
 }
 
-int LoadText_Printf(const char* path) {
+int LoadText_Fscanf(const char* path) {
 	int nrows = 0;
 	std::vector<double> line(5);
 	FILE* fd = fopen(path, "r");
 	assert(fd);
-	while (!feof(fd)) {
+ 	while (!feof(fd)) {
 		fscanf(fd, "%lf %lf %lf %lf %lf\n",
 					 &line[0], &line[1], &line[2], &line[3], &line[4]);
 		++nrows;
@@ -150,8 +150,8 @@ int main(int argc, char **argv) {
 	int nrows;
 	if (mode == "--direct") {
 		nrows = LoadText_Direct(argv[2]);
-	} else if (mode == "--printf") {
-		nrows = LoadText_Printf(argv[2]);
+	} else if (mode == "--fscanf") {
+		nrows = LoadText_Fscanf(argv[2]);
 	}
 
 	printf("Read %d rows\n", nrows);
